@@ -3,7 +3,7 @@ import pandas as pd
 from fpdf import FPDF
 
 st.set_page_config(
-    page_icon="🚀",  # Puedes poner tu propio ícono si quieres
+    page_icon="🚀",
     layout="wide",
     menu_items={
         'Get Help': None,
@@ -11,6 +11,18 @@ st.set_page_config(
         'About': None
     }
 )
+
+# Ocultar barra superior y menú por completo con CSS
+hide_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stAppDeployButton {display:none;}
+    </style>
+"""
+st.markdown(hide_style, unsafe_allow_html=True)
+
 
 # --- NUEVA FUNCIÓN: GENERADOR DE PDF ---
 def generar_pdf(df, datos_generales, ajuste_m3):
