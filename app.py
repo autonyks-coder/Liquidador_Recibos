@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 from fpdf import FPDF
 
+st.set_page_config(
+    page_icon="🚀",  # Puedes poner tu propio ícono si quieres
+    layout="wide",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
+)
 
 # --- NUEVA FUNCIÓN: GENERADOR DE PDF ---
 def generar_pdf(df, datos_generales, ajuste_m3):
