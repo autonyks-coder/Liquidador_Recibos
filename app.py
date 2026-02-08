@@ -185,5 +185,4 @@ if st.button("Calcular Liquidación", type="primary", use_container_width=True):
             use_container_width=True
         )
 
-
         st.success("✅ Liquidación completa.")
