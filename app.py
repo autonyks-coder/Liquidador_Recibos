@@ -45,6 +45,14 @@ def generar_pdf(df, datos_generales, ajuste_m3):
 st.set_page_config(page_title="Liquidador de Servicios", page_icon="💧")
 
 st.title("💧 Liquidador de Servicios")
+pag1, pag2 = st.columns(2)
+with pag1:
+    st.link_button("Ir a Facturación Progresar",
+                   "https://www.facturacionprogresaresp.com/?_gl=1*tjqqdc*_ga*MTA0MDAyNDM4MS4xNzcwNTA4OTEx*_ga_CCSHFYSCG1*czE3NzA1MDg5MTEkbzEkZzAkdDE3NzA1MDg5MTEkajYwJGwwJGgw")
+with pag2:
+    st.link_button("Ir a Pagos en linea", "https://micrositios.avalpaycenter.com/progresar-sin-apt-voluntario-mc/login")
+
+st.divider()
 
 # --- SECCIÓN 1: DATOS GENERALES ---
 with st.expander("Datos Generales del Recibo", expanded=True):
@@ -56,7 +64,20 @@ with st.expander("Datos Generales del Recibo", expanded=True):
 
     with col2:
         m3_consumo_total = st.number_input("M3 Consumo Total (Recibo)", min_value=0.0, value=0.000, format="%.3f")
-        valor_m3_unitario = st.number_input("Valor m3 ($)", min_value=0.0, value=0.000, format="%.3f")
+
+        # --- CÁLCULO AUTOMÁTICO DEL VALOR M3 ---
+        # Validamos que m3_consumo_total no sea 0 para evitar error de división
+        calculo_valor_m3 = 0.0
+        if m3_consumo_total > 0:
+            calculo_valor_m3 = valor_total_recibo / m3_consumo_total
+
+        # Insertamos el cálculo en el parámetro 'value'
+        valor_m3_unitario = st.number_input(
+            "Valor m3 ($)",
+            min_value=0.0,
+            value=float(calculo_valor_m3),  # Aquí entra tu fórmula
+            format="%.3f"
+        )
 
 st.divider()
 
